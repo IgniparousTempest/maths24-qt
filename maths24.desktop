@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Maths-Qt
+GenericName=Maths-Qt
+Comment=Maths puzzle game where the objective is to use arithmetic to make the number 24
+Comment[af]=Wiskunde-puzzelspel waar die doel is om rekenkunde te gebruik om die nommer 24 te maak
+Exec=maths24-qt
+Icon=/usr/lib/python3/dist-packages/maths24/icons/icon.svg
+Terminal=false
+Type=Application
+Keywords=game;puzzle;
+Categories=Game;Math;Qt;
