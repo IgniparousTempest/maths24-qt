@@ -10,6 +10,10 @@ Get the deb file from the [releases page](https://github.com/IgniparousTempest/m
 
     sudo apt install ./python3-maths24-qt_0.9-1_all.deb 
 
+### Windows
+
+It is written in python, so it should work on Windows. I haven't tried it yet, but if you follow the generic instruction below and substitute the make command with the contents of the Makefile, you will come right.
+
 ### Generic
 
     git clone https://github.com/IgniparousTempest/maths24-qt
