@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Maths-Qt
-GenericName=Maths-Qt
+Name=Maths24-Qt
+GenericName=Maths24-Qt
 Comment=Maths puzzle game where the objective is to use arithmetic to make the number 24
 Comment[af]=Wiskunde-puzzelspel waar die doel is om rekenkunde te gebruik om die nommer 24 te maak
 Exec=maths24-qt

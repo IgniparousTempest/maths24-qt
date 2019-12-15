@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="maths24-qt", # Replace with your own username
-    version="0.8",
+    version="0.9",
     author="Courtney Pitcher",
     author_email="cr.pitcher@gmail.com",
     description="A maths puzzle game where the objective is to use arithmetic to make the number 24",

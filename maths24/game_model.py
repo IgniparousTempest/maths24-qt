@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 
 @dataclass
@@ -45,6 +45,7 @@ class GameModel:
         try:
             import random
 
+            # TODO: Replace with strings and use self.evaluate(), see self.clue()
             multiply = lambda a, b: a * b
             divide = lambda a, b: a / b
             add = lambda a, b: a + b
@@ -66,3 +67,32 @@ class GameModel:
             return GameModel(numbers=[str(int(num)) for num in numbers])
         except (ZeroDivisionError, AssertionError):
             return cls.random_puzzle()
+
+    def clue(self) -> Tuple[bool, str]:
+        """
+        Gets a clue to progress the puzzle.
+        :return: A tuple of (can the puzzle be solved, next step string)
+        """
+        if self.is_last_tile():
+            return self.numbers[self.last_tile_id()] == '24', ''
+
+        for i, num_a in enumerate(self.numbers):
+            if num_a is None:
+                continue
+            for j, num_b in enumerate(self.numbers):
+                if num_b is None or i == j:
+                    continue
+                # Operations are in order of the difficulty humans find to do them
+                for operation in ['+', '-', 'x', '÷']:
+                    # Don't suggest negative number tiles
+                    if operation == '-' and num_a < num_b:
+                        continue  # TODO: These operations are commutable, so this shouldn't be an error. I think?
+                    # Check if this branch leads to a solution
+                    try:
+                        result = self.evaluate(num_a, operation, num_b)
+                        solvable, _ = self.make_move(i, j, result).clue()
+                        if solvable:
+                            return True, f'{num_a} {operation} {num_b}'
+                    except ZeroDivisionError:
+                        pass
+        return False, ''

@@ -8,7 +8,7 @@ from maths24.game_view import GameView
 from maths24.game_controller import GameController
 from maths24.strings import Strings
 
-__version__ = '0.8'
+__version__ = '0.9'
 __author__ = 'Courtney Richard Pitcher'
 
 

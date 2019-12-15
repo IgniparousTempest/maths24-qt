@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QSizePolicy, QMessageBox
 
 import maths24.maths24_ui
 from maths24 import icons
@@ -102,7 +102,6 @@ class GameView(QtWidgets.QMainWindow, maths24.maths24_ui.Ui_MainWindow):
         self.number_buttons[index].setStyleSheet("QPushButton { background-color: red }")
 
     def set_operation_button(self, operation: str):
-        print(operation)
         for symbol, btn in self.arithmetic_buttons.items():
             if symbol == operation:
                 btn.setIcon(_icons[symbol].selected)
@@ -115,3 +114,8 @@ class GameView(QtWidgets.QMainWindow, maths24.maths24_ui.Ui_MainWindow):
         """Performs calculation and updates buttons"""
         self.number_buttons[button_first].setVisible(False)
         self.number_buttons[button_second].setText(result)
+
+    def show_hint(self, hint: str):
+        """Shows a hint to the player"""
+        # TODO: This is a bit archaic and ugly
+        QMessageBox.information(self, 'Hint', hint)

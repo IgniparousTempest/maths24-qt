@@ -4,6 +4,8 @@ from functools import partial
 # Create a Controller class to connect the GUI and the model
 from typing import List, Optional
 
+from PyQt5.QtWidgets import QMessageBox
+
 from maths24.dialogue_game_won import GameWonDialog
 from maths24.dialogue_info import InfoDialog
 from maths24.game_model import GameModel
@@ -25,6 +27,7 @@ class GameController:
 
     def _new_game(self, model: GameModel, history: List[GameModel] = None):
         """Starts a new game with the provided model."""
+        print(f'Starting a new game with:', model.numbers)
         self._model = model
         self._model_history: List[GameModel] = [model] if history is None else history
 
@@ -106,6 +109,14 @@ class GameController:
         print('Skipping puzzle')
         self._new_game(GameModel.random_puzzle())
 
+    def _click_hint(self):
+        is_solvable, hint = self._model_history[-1].clue()
+        print('Getting a hint:', hint if is_solvable else 'not solvable')
+        if is_solvable:
+            self._view.show_hint(hint)
+        else:
+            self._view.show_hint('This puzzle can not be solved, try pressing undo.')
+
     def _connect_signals(self):
         """Connect signals and slots."""
         for i, btn in enumerate(self._view.number_buttons):
@@ -117,3 +128,4 @@ class GameController:
         self._view.pushButton_undo.clicked.connect(self._click_undo)
         self._view.pushButton_info.clicked.connect(self._click_info)
         self._view.pushButton_skip.clicked.connect(self._click_skip)
+        self._view.pushButton_hint.clicked.connect(self._click_hint)
