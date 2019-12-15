@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from fractions import Fraction as frac
 from typing import List, Optional, Tuple
 
 
@@ -24,8 +25,8 @@ class GameModel:
 
     @classmethod
     def evaluate(cls, number1: str, operation: str, number2: str) -> str:
-        a = int(number1)
-        b = int(number2)
+        a = frac(number1)
+        b = frac(number2)
         if operation == '+':
             return str(a + b)
         elif operation == '-':
@@ -33,7 +34,7 @@ class GameModel:
         elif operation == 'x':
             return str(a * b)
         else:
-            return str(a // b)  # TODO: Fractions
+            return str(a / b)
 
     @classmethod
     def is_division(cls, operation: str) -> bool:
