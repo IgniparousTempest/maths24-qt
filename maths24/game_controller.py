@@ -1,10 +1,5 @@
 from functools import partial
-
-
-# Create a Controller class to connect the GUI and the model
 from typing import List, Optional
-
-from PyQt5.QtWidgets import QMessageBox
 
 from maths24.dialogue_game_won import GameWonDialog
 from maths24.dialogue_info import InfoDialog
@@ -14,7 +9,7 @@ from maths24.strings import Strings
 
 
 class GameController:
-    """PyCalc Controller class."""
+    """Game Controller class. Connects the GUI with the model."""
 
     def __init__(self, model: GameModel, view: GameView, strings: Strings):
         """Controller initializer."""

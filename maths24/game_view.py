@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QSizePolicy, QMessageBox
+from PyQt5 import QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 import maths24.maths24_ui
 from maths24 import icons
