@@ -97,3 +97,16 @@ class GameModel:
                     except ZeroDivisionError:
                         pass
         return False, ''
+
+    def difficulty(self) -> int:
+        """
+        Determines the difficulty of the puzzle.
+
+        A puzzle is determined to be:
+        - Easy if it has at least one solution that is comprised of only addition and subtraction.
+        - Medium if at least one solution does not contain a divide.
+        - Hard if all solutions contain divides.
+
+        :return: The difficulty as an integer. 1 = easy, 2 = medium, 3 = hard, and -1 means unsolvable.
+        """
+        raise NotImplementedError
