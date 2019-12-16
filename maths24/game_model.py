@@ -1,3 +1,4 @@
+import random
 from dataclasses import dataclass
 from fractions import Fraction as frac
 from typing import List, Optional, Tuple
@@ -44,26 +45,19 @@ class GameModel:
     def random_puzzle(cls) -> "GameModel":
         """Generates a random game."""
         try:
-            import random
-
-            # TODO: Replace with strings and use self.evaluate(), see self.clue()
-            multiply = lambda a, b: a * b
-            divide = lambda a, b: a / b
-            add = lambda a, b: a + b
-            subtract = lambda a, b: a - b
-
-            numbers = [24]
+            numbers = ['24']
             for _ in range(3):
-                operation = random.choice([multiply, divide, add, subtract])
-                num_a = random.randint(1, 13)
+                operation = random.choice(['+', '-', 'x', '÷'])
+                num_a = str(random.randint(1, 13))
                 index = random.randint(0, len(numbers) - 1)
                 num_b = numbers[index]
-                numbers[index] = operation(num_a, num_b)
+                numbers[index] = GameModel.evaluate(num_a, operation, num_b)
                 numbers.append(num_a)
             # Is a good puzzle?
             for num in numbers:
                 # Must be an int in range
-                if not (1 <= num <= 13 and (type(num) == int or num.is_integer())):
+                num = frac(num)
+                if not (frac(1) <= num <= frac(13) and str(num).isdigit()):
                     raise AssertionError('Ugly puzzle')
             return GameModel(numbers=[str(int(num)) for num in numbers])
         except (ZeroDivisionError, AssertionError):
