@@ -1,0 +1,2 @@
+class AlreadySolved(Exception):
+    pass

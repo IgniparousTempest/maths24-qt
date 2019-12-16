@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from fractions import Fraction as frac
 from typing import List, Optional, Tuple
 
+from maths24.error import AlreadySolved
+
 
 @dataclass
 class GameModel:
@@ -16,7 +18,7 @@ class GameModel:
         for i in range(len(self.numbers)):
             if self.numbers[i] is not None:
                 return i
-        raise RuntimeError("All tiles have been cleared")
+        raise AlreadySolved("All tiles have been cleared")
 
     def make_move(self, index_remove: int, index_new: int, value: str) -> "GameModel":
         numbers = self.numbers[:]
@@ -80,7 +82,7 @@ class GameModel:
                 # Operations are in order of the difficulty humans find to do them
                 for operation in ['+', '-', 'x', '÷']:
                     # Don't suggest negative number tiles
-                    if operation == '-' and num_a < num_b:
+                    if operation == '-' and frac(num_a) < frac(num_b):
                         continue  # TODO: These operations are commutable, so this shouldn't be an error. I think?
                     # Check if this branch leads to a solution
                     try:
