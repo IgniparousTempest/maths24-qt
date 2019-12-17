@@ -94,6 +94,34 @@ class GameModel:
                         pass
         return False, ''
 
+    def solutions(self) -> List[str]:
+        return [solution for solution in self._solutions()]
+
+    def _solutions(self):
+        for i, num_a in enumerate(self.numbers):
+            if num_a is None:
+                continue
+            for j, num_b in enumerate(self.numbers):
+                if num_b is None or i == j:
+                    continue
+                # Operations are in order of the difficulty humans find to do them
+                for operation in ['+', '-', 'x', '÷']:
+                    # Don't suggest negative number tiles
+                    if operation == '-' and frac(num_a) < frac(num_b):
+                        continue  # TODO: These operations are commutable, so this shouldn't be an error. I think?
+                    # Check if this branch leads to a solution
+                    try:
+                        result = self.evaluate(num_a, operation, num_b)
+                        model = self.make_move(i, j, result)
+                        if model.is_last_tile() and model.numbers[model.last_tile_id()] == '24':
+                            yield f'{num_a} {operation} {num_b}'
+                        else:
+                            for solution in model._solutions():
+                                yield f'{num_a} {operation} ({solution})'
+                    except ZeroDivisionError:
+                        pass
+        return []
+
     def difficulty(self) -> int:
         """
         Determines the difficulty of the puzzle.
@@ -105,4 +133,14 @@ class GameModel:
 
         :return: The difficulty as an integer. 1 = easy, 2 = medium, 3 = hard, and -1 means unsolvable.
         """
-        raise NotImplementedError
+        solutions = self.solutions()
+        divides = 0
+        for solution in solutions:
+            if 'x' not in solution and '÷' not in solution:
+                return 1
+            elif '÷' in solution:
+                divides += 1
+        if divides == len(solutions):
+            return 3
+        else:
+            return 2

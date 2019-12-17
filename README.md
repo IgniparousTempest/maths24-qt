@@ -8,7 +8,7 @@ A free and open-source implementation of Maths 24 (24 game).
 
 Get the deb file from the [releases page](https://github.com/IgniparousTempest/maths24-qt/releases).
 
-    sudo apt install ./python3-maths24-qt_0.9.9-1_all.deb
+    sudo apt install ./python3-maths24-qt_0.9.10-1_all.deb
 
 ### Windows
 

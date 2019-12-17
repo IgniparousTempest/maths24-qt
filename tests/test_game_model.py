@@ -44,7 +44,9 @@ class MyTestCase(unittest.TestCase):
         for _ in range(1000):
             model = GameModel.random_puzzle()
             solvable, clue = model.clue()
+            solutions = model.solutions()
             self.assertTrue(solvable, f'Generated puzzle ({model.numbers}) must be solvable')
+            self.assertGreater(len(solutions), 0, f'Generated puzzle ({model.numbers}) must have solutions')
         self.assertEqual(True, False)
 
 

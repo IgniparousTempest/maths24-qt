@@ -72,7 +72,7 @@ class GameView(QtWidgets.QMainWindow, maths24.maths24_ui.Ui_MainWindow):
             policy.setRetainSizeWhenHidden(True)  # Does not disappear when hidden
             btn.setSizePolicy(policy)
 
-    def reset_display(self, numbers: List[str]):
+    def reset_display(self, numbers: List[str], difficulty):
         """Resets the display for a new game."""
         # Reset number buttons
         for i, btn in enumerate(self.number_buttons):
@@ -87,6 +87,13 @@ class GameView(QtWidgets.QMainWindow, maths24.maths24_ui.Ui_MainWindow):
         for symbol, btn in self.arithmetic_buttons.items():
             btn.setIcon(_icons[symbol].unselected)
             # btn.setStyleSheet("")
+
+        # Set difficulty
+        self.label_difficulty.setPixmap(icons.get_difficulty_pixelmap(difficulty))
+        try:
+            self.label_difficulty.setToolTip({1: 'Easy', 2: 'Medium', 3: 'Hard'}[difficulty])
+        except KeyError:
+            self.label_difficulty.setToolTip('Unknown')
 
     def get_number(self, index: int):
         return self.number_buttons[index].text()
