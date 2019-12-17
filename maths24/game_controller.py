@@ -29,7 +29,7 @@ class GameController:
         self._selected_first_number_button_id: Optional[int] = None
         self._selected_operation: Optional[str] = None
 
-        self._view.reset_display(model.numbers, model.difficulty())
+        self._view.reset_display(model.numbers, self._model_history[0].difficulty())
 
     def _click_number(self, button_id: int):
         """
