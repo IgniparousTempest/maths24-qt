@@ -1,6 +1,6 @@
 # Maths24-Qt
 
-A free and open-source implementation of Maths 24 (24 game).
+A free and open-source implementation of [Maths 24 (24 game)](https://en.wikipedia.org/wiki/24_Game) written in Python3 and Qt.
 
 ## Install
 
